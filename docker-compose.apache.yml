@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+   apache:
+      container_name: kapache
+      build:
+         context: .
+         dockerfile: apache/Dockerfile
+      image: kapache
+      volumes:
+         - ./app/:/var/www/html/
+         - ./logs/apache/:/var/log/apache2/
+      ports:
+         - 8080:80
+         - 443:443
+      networks:
+         - knet
+
+networks:
+   knet:
+      driver: bridge
